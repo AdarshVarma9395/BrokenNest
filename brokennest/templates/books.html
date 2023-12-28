@@ -19,15 +19,34 @@
             <hr>
             <div class="mb-3">
               <label class="form-label">Poem Name</label>
-              <input name = "note_name" type="text" class="form-control" >
+              <input name = "note_name" type="text" required class="form-control" >
             </div>
             <div class="mb-3">
               <label class="form-label">Poem</label>
-              <textarea name = "note_name" class="form-control"></textarea>
+              <textarea name = "note_description" required class="form-control"></textarea>
             </div>
             
             <button type="submit" class="btn btn-success">Add Poem</button>
           </form>
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sr No</th>
+                <th scope="col">Poem Name</th>
+                <th scope="col">Poem</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for note in notebook %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{note.note_name}}</td>
+                <td>{{note.note_description}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
     </div>
 </body>
 </html>
