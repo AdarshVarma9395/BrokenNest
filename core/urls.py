@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from brokennest.views import *
 
 urlpatterns = [
+    path("", notebook, name = "notebook"),
     path("admin/", admin.site.urls),
 ]
