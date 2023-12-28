@@ -18,6 +18,7 @@ def notebook(request):
 
     queryset = books.objects.all()
     context = {"notebook":queryset}
-
-
     return render(request, "books.html", context)
+
+
+# sare code ka meaning malum karna hai

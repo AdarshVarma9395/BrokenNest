@@ -42,7 +42,11 @@
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{note.note_name}}</td>
-                <td>{{note.note_description}}</td>
+                <td>
+                    <pre>
+                        {{note.note_description}}
+                    </pre>
+                </td>
               </tr>
               {% endfor %}
             </tbody>
