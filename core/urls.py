@@ -20,5 +20,7 @@ from brokennest.views import *
 
 urlpatterns = [
     path("", notebook, name = "notebook"),
+    path("delete_note/<id>/", delete_note, name = "delete_note"),
+    path("update_note/<id>/", update_note, name = "update_note"),
     path("admin/", admin.site.urls),
 ]

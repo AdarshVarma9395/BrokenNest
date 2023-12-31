@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>BrokenNest</title>
+    <style>
+        table, th, td {
+              border: 1px solid black;
+            }
+      </style>
+</head>
+<body>
+    <div class = "container mt-5">
+        <form class="col-7 mx-auto card p-3 shadow-lg" method="post">
+            {% csrf_token %}
+            <h2>Update Poem</h2>
+            <hr>
+            <div class="mb-3">
+              <label class="form-label">Poem Name</label>
+              <input name = "note_name" value="{{notebook.note_name}}" type="text" required class="form-control" >
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Poem</label>
+              <textarea name = "note_description" required class="form-control">{{notebook.note_description}}</textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-success">Update Poem</button>
+          </form>
+    </div>
+</body>
+</html>

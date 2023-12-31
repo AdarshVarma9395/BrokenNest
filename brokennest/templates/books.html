@@ -30,6 +30,20 @@
           </form>
 
           <hr>
+
+          <div class="mt-5">
+            <div class="mx-auto col-6">
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Search Poem</label>
+                <input name="Search" type="text" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            </div>
+          </div>
+
+          <hr>
           
           <table class="table">
             <thead>
@@ -37,6 +51,7 @@
                 <th scope="col">Sr No</th>
                 <th scope="col">Poem Name</th>
                 <th scope="col">Poem</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -45,9 +60,13 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{note.note_name}}</td>
                 <td>
-                    <pre>
+                    <pre mt-2>
                         {{note.note_description}}
                     </pre>
+                </td>
+                <td>
+                    <a href="/delete_note/{{note.id}}/" class="btn btn-danger m-2">Delete</a>
+                    <a href="/update_note/{{note.id}}/" class="btn btn-success m-2">Update</a>
                 </td>
               </tr>
               {% endfor %}
