@@ -48,4 +48,3 @@ def update_note(request, id):
 
 
 
-# sare code ka meaning malum karna hai
