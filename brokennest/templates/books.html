@@ -60,9 +60,7 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{note.note_name}}</td>
                 <td>
-                    <pre mt-2>
-                        {{note.note_description}}
-                    </pre>
+                  <pre mt-2>{{ note.note_description }}</pre>
                 </td>
                 <td>
                     <a href="/delete_note/{{note.id}}/" class="btn btn-danger m-2">Delete</a>
