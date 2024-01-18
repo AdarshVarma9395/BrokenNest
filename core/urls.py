@@ -22,5 +22,7 @@ urlpatterns = [
     path("", notebook, name = "notebook"),
     path("delete_note/<id>/", delete_note, name = "delete_note"),
     path("update_note/<id>/", update_note, name = "update_note"),
+    path("login/", login_page, name = "login_page"),
+    path("register/", register_page, name = "register_page"),
     path("admin/", admin.site.urls),
 ]

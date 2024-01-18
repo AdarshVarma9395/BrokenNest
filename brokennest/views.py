@@ -47,4 +47,8 @@ def update_note(request, id):
 
 
 
+def login_page(request):
+    return render(request, "login.html")
 
+def register_page(request):
+    return render(request, "register.html")
