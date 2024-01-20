@@ -3,8 +3,10 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
-
+# homepage
+@login_required(login_url="/login/")
 def notebook(request):
     if request.method == "POST":
         data = request.POST
@@ -27,11 +29,15 @@ def notebook(request):
     context = {"notebook":queryset}
     return render(request, "books.html", context)
 
+# delete information
+@login_required(login_url="/login/")
 def delete_note(request, id):
     queryset = books.objects.get(id=id)
     queryset.delete()
     return redirect("notebook")
 
+# update information
+@login_required(login_url="/login/")
 def update_note(request, id):
     queryset = books.objects.get(id=id)
     if request.method == "POST":
