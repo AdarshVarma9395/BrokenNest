@@ -19,7 +19,8 @@ from django.urls import path
 from brokennest.views import *
 
 urlpatterns = [
-    path("", notebook, name = "notebook"),
+    path("", homepage, name = "homepage"),
+    path("brocken-nest/", notebook, name = "notebook"),
     path("delete_note/<id>/", delete_note, name = "delete_note"),
     path("update_note/<id>/", update_note, name = "update_note"),
     path("login/", login_page, name = "login_page"),

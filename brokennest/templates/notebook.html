@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block start %}
+
+
+    <div class = "container mt-5"> 
+
+          <div class="mt-5">
+            <div class="mx-auto col-6">
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Search Your Poems</label>
+                <input name="Search" type="text" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-success">Search</button>
+            </form>
+            </div>
+          </div>
+
+          <hr>
+          
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Sr No</th>
+                <th scope="col">Poet Name</th>
+                <th scope="col">Poetry</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for note in notebook %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{note.note_name}}</td>
+                <td>
+                  <pre mt-2>{{ note.note_description }}</pre>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+{% endblock %}

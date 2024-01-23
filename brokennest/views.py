@@ -5,7 +5,18 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-# homepage
+
+# before authenticated
+def homepage(request):
+    queryset = books.objects.all()
+
+    if request.GET.get("Search"):
+         queryset = queryset.filter(note_name__icontains = request.GET.get("Search"))
+
+    context = {"notebook":queryset}
+    return render(request, "notebook.html", context)
+
+# after authenticated
 @login_required(login_url="/login/")
 def notebook(request):
     if request.method == "POST":
@@ -79,7 +90,7 @@ def login_page(request):
 # logout information
 def logout_page(request):
     logout(request)
-    return redirect("login_page")
+    return redirect("/")
 
 # register information
 def register_page(request):
@@ -105,6 +116,6 @@ def register_page(request):
 
         messages.info(request, "Account created successfully")
 
-
         return redirect("login_page")
-    return render(request, "register.html")
+    context = {'show_register': True}
+    return render(request, "register.html",context)
