@@ -1,4 +1,4 @@
-from django.shortcuts import render , redirect
+from django.shortcuts import render , redirect, get_object_or_404
 from .models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -28,6 +28,7 @@ def notebook(request):
         books.objects.create(
             note_name = note_name,
             note_description = note_description,
+            user=request.user # Set the user field to the current user
         )
 
         return redirect("notebook")
@@ -43,26 +44,40 @@ def notebook(request):
 # delete information
 @login_required(login_url="/login/")
 def delete_note(request, id):
-    queryset = books.objects.get(id=id)
-    queryset.delete()
+    book = get_object_or_404(books, id=id)
+    # Check if the current user is the author of the book
+    if request.user != book.user:
+        messages.error(request, "You do not have permission to delete this Poem.")
+        return redirect("notebook")
+    
+    book.delete()
+    messages.success(request, "Poem deleted successfully.")
     return redirect("notebook")
 
 # update information
 @login_required(login_url="/login/")
 def update_note(request, id):
-    queryset = books.objects.get(id=id)
+    book = get_object_or_404(books, id=id)
+
+    # Check if the current user is the author of the book
+    if request.user != book.user:
+        messages.error(request, "You do not have permission to update this Poem.")
+        return redirect("notebook")
+
     if request.method == "POST":
         data = request.POST
 
         note_name = data.get("note_name")
         note_description = data.get("note_description")
-        
-        queryset.note_name = note_name
-        queryset.note_description = note_description
-        queryset.save()
+
+        book.note_name = note_name
+        book.note_description = note_description
+        book.save()
+
+        messages.success(request, "Poem updated successfully.")
         return redirect("notebook")
 
-    context = {"notebook": queryset}
+    context = {"notebook": book}
     return render(request, "update_books.html", context)
 
 
