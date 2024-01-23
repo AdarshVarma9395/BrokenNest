@@ -47,11 +47,11 @@ def delete_note(request, id):
     book = get_object_or_404(books, id=id)
     # Check if the current user is the author of the book
     if request.user != book.user:
-        messages.error(request, "You do not have permission to delete this Poem.")
+        # messages.error(request, "You do not have permission to delete this Poem.")
         return redirect("notebook")
     
     book.delete()
-    messages.success(request, "Poem deleted successfully.")
+    # messages.success(request, "Poem deleted successfully.")
     return redirect("notebook")
 
 # update information
@@ -61,7 +61,7 @@ def update_note(request, id):
 
     # Check if the current user is the author of the book
     if request.user != book.user:
-        messages.error(request, "You do not have permission to update this Poem.")
+        # messages.error(request, "You do not have permission to update this Poem.")
         return redirect("notebook")
 
     if request.method == "POST":
@@ -74,7 +74,7 @@ def update_note(request, id):
         book.note_description = note_description
         book.save()
 
-        messages.success(request, "Poem updated successfully.")
+        # messages.success(request, "Poem updated successfully.")
         return redirect("notebook")
 
     context = {"notebook": book}
