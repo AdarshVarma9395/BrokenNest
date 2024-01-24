@@ -19,10 +19,11 @@
 
           <div class="d-flex flex-column align-items-center">
             {% for note in notebook %}
-            <div class="card my-3 shadow-lg card-container">
+            <div class="card my-3 shadow-lg" style="width: 70%;">
               <div class="card-body">
                 <h5 class="card-title">{{note.note_name}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{note.created_time}}</h6>
+                <hr>
                 <i class="card-text"><pre mt-2>{{ note.note_description }}</pre></i>
                 {% if request.user.is_authenticated and request.user == note.user %}
                 <a href="{% url 'delete_note' note.id %}" class="card-link">Delete</a>
