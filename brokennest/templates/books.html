@@ -20,7 +20,7 @@
             <button type="submit" class="btn btn-success">Add Poem</button>
           </form>
 
-          <hr>
+          
 
           <div class="mt-5">
             <div class="mx-auto col-6 ">
@@ -40,7 +40,7 @@
             {% for note in notebook %}
             {% if request.user.is_authenticated and request.user == note.user %}
 
-            <div class="card my-3 shadow-lg" style="width: 38rem;">
+            <div class="card my-3 shadow-lg" style="width: 70%;">
               <div class="card-body">
                 <h5 class="card-title">{{note.note_name}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>

@@ -9,12 +9,21 @@
         table, th, td {
             border: 1px solid black;
           }
+          .card-container{
+            width: 50%;
+          }
+          @media only screen and (max-width: 768px) {
+            .card-container{
+                width: 90%;
+            }
+        }
+        
     </style>
 </head>
 <body>
     <nav class="navbar p-2 bg-body-tertiary shadow-lg">
         <div class="container-fluid">
-            <a class="navbar-brand">Brocken Nest</a>
+            <a class="navbar-brand">Broken Nest</a>
     
             <div class="d-flex">
                 {% if request.user.is_authenticated %}
