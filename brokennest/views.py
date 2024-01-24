@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+import datetime
 
 
-# before authenticated
+# before-authenticated-page
 def homepage(request):
     queryset = books.objects.all()
 
@@ -16,7 +17,7 @@ def homepage(request):
     context = {"notebook":queryset}
     return render(request, "notebook.html", context)
 
-# after authenticated
+# after-authenticated-page
 @login_required(login_url="/login/")
 def notebook(request):
     if request.method == "POST":
@@ -24,11 +25,13 @@ def notebook(request):
 
         note_name = data.get("note_name")
         note_description = data.get("note_description")
+        created_time = datetime.datetime.now()
 
         books.objects.create(
             note_name = note_name,
             note_description = note_description,
-            user=request.user # Set the user field to the current user
+            user=request.user, # Set the user field to the current user
+            created_time = created_time,
         )
 
         return redirect("notebook")
@@ -41,15 +44,14 @@ def notebook(request):
     context = {"notebook":queryset}
     return render(request, "books.html", context)
 
-# delete information
-# @login_required(login_url="/login/")
+# delete-page
 @login_required(login_url="/login/")
 def delete_note(request, id):
     queryset = books.objects.get(id=id)
     queryset.delete()
     return redirect("notebook")
 
-# update information
+# update-page
 @login_required(login_url="/login/")
 def update_note(request, id):
     queryset = books.objects.get(id=id)
@@ -68,7 +70,7 @@ def update_note(request, id):
     return render(request, "update_books.html", context)
 
 
-# login information
+# login-page
 def login_page(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -89,12 +91,12 @@ def login_page(request):
         
     return render(request, "login.html")
 
-# logout information
+# logout-page
 def logout_page(request):
     logout(request)
     return redirect("/")
 
-# register information
+# register-page
 def register_page(request):
 
     if request.method == "POST":
