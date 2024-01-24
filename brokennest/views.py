@@ -123,3 +123,10 @@ def register_page(request):
         return redirect("login_page")
     context = {'show_register': True}
     return render(request, "register.html",context)
+
+
+
+
+
+
+
