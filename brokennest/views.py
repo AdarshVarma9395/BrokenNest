@@ -42,42 +42,29 @@ def notebook(request):
     return render(request, "books.html", context)
 
 # delete information
+# @login_required(login_url="/login/")
 @login_required(login_url="/login/")
 def delete_note(request, id):
-    book = get_object_or_404(books, id=id)
-    # Check if the current user is the author of the book
-    if request.user != book.user:
-        # messages.error(request, "You do not have permission to delete this Poem.")
-        return redirect("notebook")
-    
-    book.delete()
-    # messages.success(request, "Poem deleted successfully.")
+    queryset = books.objects.get(id=id)
+    queryset.delete()
     return redirect("notebook")
 
 # update information
 @login_required(login_url="/login/")
 def update_note(request, id):
-    book = get_object_or_404(books, id=id)
-
-    # Check if the current user is the author of the book
-    if request.user != book.user:
-        # messages.error(request, "You do not have permission to update this Poem.")
-        return redirect("notebook")
-
+    queryset = books.objects.get(id=id)
     if request.method == "POST":
         data = request.POST
 
         note_name = data.get("note_name")
         note_description = data.get("note_description")
-
-        book.note_name = note_name
-        book.note_description = note_description
-        book.save()
-
-        # messages.success(request, "Poem updated successfully.")
+        
+        queryset.note_name = note_name
+        queryset.note_description = note_description
+        queryset.save()
         return redirect("notebook")
 
-    context = {"notebook": book}
+    context = {"notebook": queryset}
     return render(request, "update_books.html", context)
 
 
