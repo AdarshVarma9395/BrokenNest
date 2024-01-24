@@ -23,34 +23,36 @@
           <hr>
 
           <div class="mt-5">
-            <div class="mx-auto col-6">
+            <div class="mx-auto col-6 ">
             <form>
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Search Your Poems</label>
                 <input name="Search" type="text" class="form-control">
               </div>
-              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="submit" class="btn btn-success">Search</button>
             </form>
             </div>
           </div>
-
-          <hr>
           
+          <!-- card -->
+
           <div class="d-flex flex-column align-items-center">
             {% for note in notebook %}
-            <div class="card my-3" style="width: 38rem;">
+            {% if request.user.is_authenticated and request.user == note.user %}
+
+            <div class="card my-3 shadow-lg" style="width: 38rem;">
               <div class="card-body">
                 <h5 class="card-title">{{note.note_name}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
                 <i class="card-text"><pre mt-2>{{ note.note_description }}</pre></i>
-                {% if request.user.is_authenticated and request.user == note.user %}
                 <a href="{% url 'delete_note' note.id %}" class="card-link">Delete</a>
                 <a href="{% url 'update_note' note.id %}" class="card-link">Update</a>
-                {% endif %}
               </div>
             </div>
+            {% endif %}
+
             {% endfor %}
           </div>
-
+          
     </div>
 {% endblock %}

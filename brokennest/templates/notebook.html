@@ -17,27 +17,20 @@
             </div>
           </div>
 
-          <hr>
-          
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Sr No</th>
-                <th scope="col">Poet Name</th>
-                <th scope="col">Poetry</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for note in notebook %}
-              <tr>
-                <th scope="row">{{ forloop.counter }}</th>
-                <td>{{note.note_name}}</td>
-                <td>
-                  <pre mt-2>{{ note.note_description }}</pre>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
+          <div class="d-flex flex-column align-items-center">
+            {% for note in notebook %}
+            <div class="card my-3 shadow-lg" style="width: 38rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{note.note_name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <i class="card-text"><pre mt-2>{{ note.note_description }}</pre></i>
+                {% if request.user.is_authenticated and request.user == note.user %}
+                <a href="{% url 'delete_note' note.id %}" class="card-link">Delete</a>
+                <a href="{% url 'update_note' note.id %}" class="card-link">Update</a>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
     </div>
 {% endblock %}
